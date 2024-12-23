@@ -1,14 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Student Portal</title>
-    <link rel="stylesheet" href="./style.css">
-</head>
-<body>
-    
-    <h1>hello</h1>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <section class="header">
+      <h1>Student Protal</h1>
+    </section>
+    <section class="search">
+      <div class="search-container">
+        <input
+          oninput="Search()"
+          id="searchText"
+          type="text"
+          placeholder="Search"
+        />
+        <button onclick="Search()">Search</button>
+      </div>
+    </section>
+    <section class="butttons">
+      <div class="btn-container">
+        <button onclick="sortAZ()">Sort A->Z</button>
+        <button onclick="sortZA()">Sort Z->A</button>
+        <button onclick="sortMarks()">Sort By Marks</button>
+        <button onclick="sortPass()">Sort By Passing</button>
+        <button onclick="sortClass()">Sort By Class</button>
+        <button onclick="sortGender()">Sort By Gender</button>
+        <button
+          onclick="resetTable()"
+          style="width: 70px; height: 50px; background-color: rgb(13, 57, 192)"
+        >
+          Reset
+        </button>
+      </div>
+    </section>
+    <section class="table">
+      <div class="table-container">
+        <table class="infoTable"></table>
+      </div>
+    </section>
     <script src="./script.js"></script>
-</body>
+  </body>
 </html>
