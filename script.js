@@ -1234,9 +1234,9 @@ let arr = [
   },
 ];
 
-let arr2=arr.filter((item)=>{
-    return true;
-})
+let arr2 = arr.filter((item) => {
+  return true;
+});
 
 function renderTable() {
   let tableInfo = document.querySelector(".infoTable");
@@ -1276,74 +1276,93 @@ function renderTable() {
 renderTable();
 
 function sortAZ() {
-arr.sort(function(a,b){
-    let x=(a.first_name+a.last_name).toLowerCase();
-    let y=(b.first_name+b.last_name).toLowerCase();
-    if(x>y)
-    return 1;
-    if(y>x)
-    return -1;
-});
-renderTable();
+  arr.sort(function (a, b) {
+    let x = (a.first_name + a.last_name).toLowerCase();
+    let y = (b.first_name + b.last_name).toLowerCase();
+    if (x > y) return 1;
+    if (y > x) return -1;
+  });
+  renderTable();
 }
 function sortZA() {
-    arr.sort(function(a,b){
-        let x=(a.first_name+a.last_name).toLowerCase();
-        let y=(b.first_name+b.last_name).toLowerCase();
-        if(x>y)
-        return -1;
-        if(y>x)
-        return 1;
-    });
-    renderTable();
+  arr.sort(function (a, b) {
+    let x = (a.first_name + a.last_name).toLowerCase();
+    let y = (b.first_name + b.last_name).toLowerCase();
+    if (x > y) return -1;
+    if (y > x) return 1;
+  });
+  renderTable();
 }
 function sortMarks() {
-    arr.sort((a,b)=>a.marks-b.marks);
-    renderTable();
+  arr.sort((a, b) => a.marks - b.marks);
+  renderTable();
 }
 function sortPass() {
-
-    arr.sort(function(a,b){
-        let x=a.passing;
-        let y=b.passing;
-        if(x>y)
-        return -1;
-        if(y>x)
-        return 1;
-    });
-    renderTable();
-   
+  arr = arr.filter((item) => item.passing);
+  renderTable();
 }
 function sortClass() {
-
-    arr.sort((a,b)=>a.class-b.class);
-    console.log(arr);
-    renderTable();
+  arr.sort((a, b) => a.class - b.class);
+  console.log(arr);
+  renderTable();
 }
 function sortGender() {
-
-    arr.sort(function(a,b){
-        let x=a.gender.toLowerCase();
-        let y=b.gender.toLowerCase();
-        if(x>y)
-        return 1;
-        if(y>x)
-        return -1;
-    });
-    renderTable();
-
+  let tableContainer = document.querySelector(".table-container");
+  //female table
+  arr = arr.filter((item) => item.gender == "Female");
+  renderTable();
+  //male table
+  arr = arr2.filter((item) => item.gender == "Male");
+  
+  let MaleTable = document.createElement("table");
+  MaleTable.setAttribute("class","maleTable")
+  MaleTable.innerHTML = `<tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Gender</th>
+                  <th>Class</th>
+                  <th>Marks</th>
+                  <th>Passing</th>
+                  <th>Email</th>
+              </tr>`;
+  arr.map((item) => {
+    MaleTable.innerHTML += `
+                    <tr>
+                    <td>${item.id}.</td>
+                    <td>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                    <img src=${
+                      item.img_src
+                    } style="border-radius: 50%; border: 1px solid black; height: 40%;">
+                    <span>${item.first_name + " " + item.last_name}</span>
+                    </div>
+                    </td>
+                            <td>${item.gender}</td>
+                            <td>${item.class}</td>
+                            <td>${item.marks}</td>
+                            <td>${item.passing ? "Passing" : "Failed"}</td>
+                            <td>${item.email}</td>
+                        </tr>
+                        `;
+  });
+  tableContainer.appendChild(MaleTable);
 }
 
-function Search()
-{
-    let text=document.querySelector("#searchText");
-    console.log(text.value);
-    arr=arr.filter((item)=>item.first_name.includes(text.value));
-    renderTable();
+function Search() {
+  let text = document.querySelector("#searchText");
+  console.log(text.value);
+  arr = arr.filter(
+    (item) =>
+      item.first_name.toLowerCase().includes(text.value) ||
+      item.last_name.toLowerCase().includes(text.value) ||
+      item.email.toLowerCase().includes(text.value)
+  );
+  renderTable();
 }
 
-function resetTable()
-{
-arr=arr2.map((item)=>item);
-renderTable();
+function resetTable() {
+  arr = arr2.map((item) => item);
+  renderTable();
+  document.querySelector(".maleTable").remove();
+
 }
